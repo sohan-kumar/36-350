@@ -5,3 +5,7 @@ generate_data <- function(n, p) {
   return(list(covariates = cov_mat, responses = cov_mat[,row]))
 }
 
+model_select <- function(covariates, responses, cutoff) {
+  reg <- lm(responses ~ covariates)
+  return(lm(responses ~ covariates[,reg$coefficients < cutoff]))
+}
